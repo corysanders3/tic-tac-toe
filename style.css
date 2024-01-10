@@ -56,3 +56,11 @@ main {
     border-left: none;
 }
 
+h3, h4{
+    margin: 0;
+}
+
+.emoji {
+    font-size: 3em;
+    margin-top: -10%;
+}
