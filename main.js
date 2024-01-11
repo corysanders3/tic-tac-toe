@@ -11,13 +11,13 @@ window.addEventListener('load', function() {
     createPlayer('playerTwo', '&#x265E;', 'Player Two');
     updatePlayerDetails(players, playerSections);
     firstTurn();
-    // getChildIndexNumber(boardSection, boardIndexPositions);
 });
 
 boardSection.addEventListener('click', function(event){
     playSpace(event, players);
-    updateTurn(players);
     pushSpace(dataSelector, playedPositions)
+    checkIfWin(playedPositions, winningPositions);
+    // updateTurn(players)
 });
 
 var players = [];
@@ -25,7 +25,8 @@ var playedPositions = {
     playerOne: [],
     playerTwo: []
 };
-// var boardIndexPositions = [];
+
+var winningPositions = ['012', '345', '678', '036', '147', '258', '048', '246'];
 
 function createPlayer(id, token, playerName){
     var newPlayer = {
@@ -79,6 +80,19 @@ function pushSpace(data, players) {
         }
     }
 };
+
+function checkIfWin(playerSpots, winning) {
+    for(var i = 0; i < winning.length; i++) {
+        var everyWinningCombo = winning[i].split('')
+
+        if(everyWinningCombo.every(item => playerSpots.playerOne.includes(item))){
+            console.log('Player One Wins')
+        } else if(everyWinningCombo.every(item => playerSpots.playerTwo.includes(item))) {
+            console.log('Player Two Wins')
+        } 
+    }
+    updateTurn(players)
+}
 
 function updateTurn(allPlayers) {
     for(var i = 0; i < allPlayers.length; i++) {
