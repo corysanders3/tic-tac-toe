@@ -4,20 +4,28 @@ var playerSections = {
     playerOne: document.querySelector('.player-one'),
     playerTwo: document.querySelector('.player-two')
 };
+var dataSelector = document.querySelectorAll('[data-value]')
 
 window.addEventListener('load', function() {
     createPlayer('playerOne', '&#x2658;', 'Player One');
     createPlayer('playerTwo', '&#x265E;', 'Player Two');
     updatePlayerDetails(players, playerSections);
     firstTurn();
+    // getChildIndexNumber(boardSection, boardIndexPositions);
 });
 
 boardSection.addEventListener('click', function(event){
     playSpace(event, players);
     updateTurn(players);
+    pushSpace(dataSelector, playedPositions)
 });
 
 var players = [];
+var playedPositions = {
+    playerOne: [],
+    playerTwo: []
+};
+// var boardIndexPositions = [];
 
 function createPlayer(id, token, playerName){
     var newPlayer = {
@@ -60,6 +68,18 @@ function playSpace(event, allPlayers) {
     }
 };
 
+function pushSpace(data, players) {
+    for(var i = 0; i < data.length; i++) {
+        if(data[i].children[0] !== undefined) {
+            if(data[i].children[0].dataset.player === 'playerOne' && !players.playerOne.includes(data[i].dataset.value)) {
+            players.playerOne.push(data[i].dataset.value)
+            } else if (data[i].children[0].dataset.player === 'playerTwo' && !players.playerTwo.includes(data[i].dataset.value)) {
+                players.playerTwo.push(data[i].dataset.value)
+            }
+        }
+    }
+};
+
 function updateTurn(allPlayers) {
     for(var i = 0; i < allPlayers.length; i++) {
         if(allPlayers[i].id !== whosTurnSection.children[0].id) {
@@ -68,5 +88,12 @@ function updateTurn(allPlayers) {
         }
     }
 };
+
+// function getChildIndexNumber(board, index) {
+//     var boardPositions = board.children
+//     for(var i = 0; i < boardPositions.length; i++) {
+//         index.push(i)
+//     }
+// };
 
 //window.prompt('Enter First Name:', 'Player One')
