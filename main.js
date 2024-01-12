@@ -15,9 +15,8 @@ window.addEventListener('load', function() {
 
 boardSection.addEventListener('click', function(event){
     playSpace(event, players);
-    pushSpace(dataSelector, playedPositions)
+    pushSpace(dataSelector, playedPositions);
     checkIfWin(playedPositions, winningPositions);
-    // updateTurn(players)
 });
 
 var players = [];
@@ -59,7 +58,7 @@ function firstTurn() {
 };
 
 function playSpace(event, allPlayers) {
-    if(event.target.classList.contains('grid-space')) {
+    if(event.target.classList.contains('grid-space') && event.target.children[0] === undefined) {
         for(var i = 0; i < allPlayers.length; i++) {
             if(allPlayers[i].id === whosTurnSection.children[0].id) {
                 event.target.innerHTML = `
@@ -83,11 +82,9 @@ function pushSpace(data, players) {
 
 function checkIfWin(playerSpots, winning) {
     for(var i = 0; i < winning.length; i++) {
-        var everyWinningCombo = winning[i].split('')
-
-        if(everyWinningCombo.every(item => playerSpots.playerOne.includes(item))){
+        if(winning[i].split('').every(value => playerSpots.playerOne.includes(value))){
             console.log('Player One Wins')
-        } else if(everyWinningCombo.every(item => playerSpots.playerTwo.includes(item))) {
+        } else if(winning[i].split('').every(value => playerSpots.playerTwo.includes(value))) {
             console.log('Player Two Wins')
         } 
     }
@@ -95,19 +92,11 @@ function checkIfWin(playerSpots, winning) {
 }
 
 function updateTurn(allPlayers) {
-    for(var i = 0; i < allPlayers.length; i++) {
-        if(allPlayers[i].id !== whosTurnSection.children[0].id) {
-            return whosTurnSection.innerHTML = `
-            <h1 id="${players[i].id}">It's <span>${players[i].token}</span>'s turn!</h1>`
-        }
-    }
+    console.log(event.target)
+        for(var i = 0; i < allPlayers.length; i++) {
+            if(allPlayers[i].id !== whosTurnSection.children[0].id && !event.target.className.includes('token') && !event.target.className.includes('board')) {
+                return whosTurnSection.innerHTML = `
+                <h1 id="${players[i].id}">It's <span>${players[i].token}</span>'s turn!</h1>`
+                }
+            }
 };
-
-// function getChildIndexNumber(board, index) {
-//     var boardPositions = board.children
-//     for(var i = 0; i < boardPositions.length; i++) {
-//         index.push(i)
-//     }
-// };
-
-//window.prompt('Enter First Name:', 'Player One')
