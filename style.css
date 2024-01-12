@@ -56,8 +56,13 @@ main {
     border-left: none;
 }
 
+h2 {
+    text-align: center;
+}
+
 h3, h4{
     margin: 0;
+    text-align: center;
 }
 
 .emoji {

@@ -16,10 +16,11 @@ window.addEventListener('load', function() {
 boardSection.addEventListener('click', function(event){
     playSpace(event, players);
     pushSpace(dataSelector, playedPositions);
-    checkIfWin(playedPositions, winningPositions);
+    checkIfWin(playedPositions, winningPositions, players);
 });
 
 var players = [];
+
 var playedPositions = {
     playerOne: [],
     playerTwo: []
@@ -80,23 +81,54 @@ function pushSpace(data, players) {
     }
 };
 
-function checkIfWin(playerSpots, winning) {
+function checkIfWin(playerSpots, winning, winner) {
     for(var i = 0; i < winning.length; i++) {
         if(winning[i].split('').every(value => playerSpots.playerOne.includes(value))){
-            console.log('Player One Wins')
+            return showWinner(winner[0])
         } else if(winning[i].split('').every(value => playerSpots.playerTwo.includes(value))) {
-            console.log('Player Two Wins')
+            return showWinner(winner[1])
         } 
     }
     updateTurn(players)
 }
 
 function updateTurn(allPlayers) {
-    console.log(event.target)
-        for(var i = 0; i < allPlayers.length; i++) {
-            if(allPlayers[i].id !== whosTurnSection.children[0].id && !event.target.className.includes('token') && !event.target.className.includes('board')) {
-                return whosTurnSection.innerHTML = `
-                <h1 id="${players[i].id}">It's <span>${players[i].token}</span>'s turn!</h1>`
-                }
+    for(var i = 0; i < allPlayers.length; i++) {
+        if(allPlayers[i].id !== whosTurnSection.children[0].id && event.target.className.includes('grid-space')) {
+            return whosTurnSection.innerHTML = `
+            <h1 id="${allPlayers[i].id}">It's <span>${allPlayers[i].token}</span>'s turn!</h1>`
             }
+        }
 };
+
+function showWinner(winner) {
+    var whosTurn = whosTurnSection.children[0].id;
+    whosTurnSection.innerHTML = `
+    <h3>Congratulations ${winner.name}, you WON!!</h3>`
+    winner.wins ++
+    updatePlayerDetails(players, playerSections);
+    setTimeout(function() {
+        changeTurnAfterGame(whosTurn, players);
+        clearBoard(playedPositions);
+    }, 3500);
+};
+
+function changeTurnAfterGame(turn, allPlayers) {
+        if(turn === 'playerOne') {
+            return whosTurnSection.innerHTML = `
+            <h1 id="${allPlayers[1].id}">It's <span>${allPlayers[1].token}</span>'s turn!</h1>`
+        } else {
+            whosTurnSection.innerHTML = `
+            <h1 id="${allPlayers[0].id}">It's <span>${allPlayers[0].token}</span>'s turn!</h1>`
+        }
+};
+
+function clearBoard(positions) {
+    for(var i = 0; i < boardSection.children.length; i++) {
+        boardSection.children[i].innerHTML = '';
+    }
+    positions.playerOne = [];
+    positions.playerTwo = [];
+};
+
+//window.prompt('Enter First Name:', 'Player One'), this goes where the line 10 col 43
