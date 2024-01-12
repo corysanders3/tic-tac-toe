@@ -1,9 +1,10 @@
-var whosTurnSection = document.querySelector('.whos-turn')
-var boardSection = document.querySelector('.board')
+var whosTurnSection = document.querySelector('.whos-turn');
+var boardSection = document.querySelector('.board');
 var playerSections = {
     playerOne: document.querySelector('.player-one'),
     playerTwo: document.querySelector('.player-two')
 };
+var dataSelector = document.querySelectorAll('[data-value]');
 
 window.addEventListener('load', function() {
     createPlayer('playerOne', '&#x2658;', 'Player One');
@@ -14,10 +15,16 @@ window.addEventListener('load', function() {
 
 boardSection.addEventListener('click', function(event){
     playSpace(event, players);
-    updateTurn(players);
+    pushSpace(dataSelector, playedPositions);
+    checkIfWin(playedPositions, winningPositions, players);
 });
 
 var players = [];
+var playedPositions = {
+    playerOne: [],
+    playerTwo: []
+};
+var winningPositions = ['012', '345', '678', '036', '147', '258', '048', '246'];
 
 function createPlayer(id, token, playerName){
     var newPlayer = {
@@ -50,7 +57,7 @@ function firstTurn() {
 };
 
 function playSpace(event, allPlayers) {
-    if(event.target.classList.contains('grid-space')) {
+    if(event.target.classList.contains('grid-space') && event.target.children[0] === undefined) {
         for(var i = 0; i < allPlayers.length; i++) {
             if(allPlayers[i].id === whosTurnSection.children[0].id) {
                 event.target.innerHTML = `
@@ -60,13 +67,67 @@ function playSpace(event, allPlayers) {
     }
 };
 
-function updateTurn(allPlayers) {
-    for(var i = 0; i < allPlayers.length; i++) {
-        if(allPlayers[i].id !== whosTurnSection.children[0].id) {
-            return whosTurnSection.innerHTML = `
-            <h1 id="${players[i].id}">It's <span>${players[i].token}</span>'s turn!</h1>`
+function pushSpace(data, players) {
+    for(var i = 0; i < data.length; i++) {
+        if(data[i].children[0] !== undefined) {
+            if(data[i].children[0].dataset.player === 'playerOne' && !players.playerOne.includes(data[i].dataset.value)) {
+            players.playerOne.push(data[i].dataset.value)
+            } else if (data[i].children[0].dataset.player === 'playerTwo' && !players.playerTwo.includes(data[i].dataset.value)) {
+                players.playerTwo.push(data[i].dataset.value)
+            }
         }
     }
 };
 
-//window.prompt('Enter First Name:', 'Player One')
+function checkIfWin(playerSpots, winning, winner) {
+    for(var i = 0; i < winning.length; i++) {
+        if(winning[i].split('').every(value => playerSpots.playerOne.includes(value))){
+            return showWinner(winner[0])
+        } else if(winning[i].split('').every(value => playerSpots.playerTwo.includes(value))) {
+            return showWinner(winner[1])
+        }
+    }
+    updateTurn(players)
+};
+
+function updateTurn(allPlayers) {
+    for(var i = 0; i < allPlayers.length; i++) {
+        if(allPlayers[i].id !== whosTurnSection.children[0].id && event.target.className.includes('grid-space')) {
+            return whosTurnSection.innerHTML = `
+            <h1 id="${allPlayers[i].id}">It's <span>${allPlayers[i].token}</span>'s turn!</h1>`
+            }
+        }
+};
+
+function showWinner(winner) {
+    var whosTurn = whosTurnSection.children[0].id;
+    
+    whosTurnSection.innerHTML = `
+    <h3>Congratulations ${winner.name}, you WON!!</h3>`
+    winner.wins ++
+    updatePlayerDetails(players, playerSections);
+    setTimeout(function() {
+        changeTurnAfterGame(whosTurn, players);
+        clearBoard(playedPositions);
+    }, 3500);
+};
+
+function changeTurnAfterGame(turn, allPlayers) {
+        if(turn === 'playerOne') {
+            return whosTurnSection.innerHTML = `
+            <h1 id="${allPlayers[1].id}">It's <span>${allPlayers[1].token}</span>'s turn!</h1>`
+        } else {
+            whosTurnSection.innerHTML = `
+            <h1 id="${allPlayers[0].id}">It's <span>${allPlayers[0].token}</span>'s turn!</h1>`
+        }
+};
+
+function clearBoard(positions) {
+    for(var i = 0; i < boardSection.children.length; i++) {
+        boardSection.children[i].innerHTML = '';
+    }
+    positions.playerOne = [];
+    positions.playerTwo = [];
+};
+
+//window.prompt('Enter First Name:', 'Player One'), this goes where the line 10 col 43
