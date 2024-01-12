@@ -1,10 +1,10 @@
-var whosTurnSection = document.querySelector('.whos-turn')
-var boardSection = document.querySelector('.board')
+var whosTurnSection = document.querySelector('.whos-turn');
+var boardSection = document.querySelector('.board');
 var playerSections = {
     playerOne: document.querySelector('.player-one'),
     playerTwo: document.querySelector('.player-two')
 };
-var dataSelector = document.querySelectorAll('[data-value]')
+var dataSelector = document.querySelectorAll('[data-value]');
 
 window.addEventListener('load', function() {
     createPlayer('playerOne', '&#x2658;', 'Player One');
@@ -20,12 +20,10 @@ boardSection.addEventListener('click', function(event){
 });
 
 var players = [];
-
 var playedPositions = {
     playerOne: [],
     playerTwo: []
 };
-
 var winningPositions = ['012', '345', '678', '036', '147', '258', '048', '246'];
 
 function createPlayer(id, token, playerName){
@@ -87,10 +85,10 @@ function checkIfWin(playerSpots, winning, winner) {
             return showWinner(winner[0])
         } else if(winning[i].split('').every(value => playerSpots.playerTwo.includes(value))) {
             return showWinner(winner[1])
-        } 
+        }
     }
     updateTurn(players)
-}
+};
 
 function updateTurn(allPlayers) {
     for(var i = 0; i < allPlayers.length; i++) {
@@ -103,6 +101,7 @@ function updateTurn(allPlayers) {
 
 function showWinner(winner) {
     var whosTurn = whosTurnSection.children[0].id;
+    
     whosTurnSection.innerHTML = `
     <h3>Congratulations ${winner.name}, you WON!!</h3>`
     winner.wins ++
