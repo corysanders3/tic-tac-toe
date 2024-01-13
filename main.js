@@ -82,12 +82,22 @@ function pushSpace(data, players) {
 function checkIfWin(playerSpots, winning, winner) {
     for(var i = 0; i < winning.length; i++) {
         if(winning[i].split('').every(value => playerSpots.playerOne.includes(value))){
-            return showWinner(winner[0])
+            return showWinner(winner[0]);
         } else if(winning[i].split('').every(value => playerSpots.playerTwo.includes(value))) {
-            return showWinner(winner[1])
+            return showWinner(winner[1]);
         }
     }
-    updateTurn(players)
+    checkIfDraw(boardSection);
+};
+
+function checkIfDraw(board) {
+    for(var i = 0; i < board.children.length; i++) {
+        if(!board.children[i].hasChildNodes()) {
+            console.log('once')
+            return updateTurn(players);
+        }
+    }
+    showDraw();
 };
 
 function updateTurn(allPlayers) {
@@ -101,11 +111,28 @@ function updateTurn(allPlayers) {
 
 function showWinner(winner) {
     var whosTurn = whosTurnSection.children[0].id;
-    
+
     whosTurnSection.innerHTML = `
     <h3>Congratulations ${winner.name}, you WON!!</h3>`
-    winner.wins ++
+
+    increaseWins(winner);
+    setTimeout(function() {
+        changeTurnAfterGame(whosTurn, players);
+        clearBoard(playedPositions);
+    }, 3500);
+};
+
+function increaseWins(winner) {
+    winner.wins ++;
     updatePlayerDetails(players, playerSections);
+}
+
+function showDraw() {
+    var whosTurn = whosTurnSection.children[0].id;
+
+    whosTurnSection.innerHTML = `
+    <h3>It's a DRAW! Get Ready For The Next Game!</h3>`
+
     setTimeout(function() {
         changeTurnAfterGame(whosTurn, players);
         clearBoard(playedPositions);

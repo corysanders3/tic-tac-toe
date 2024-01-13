@@ -33,6 +33,7 @@ main {
     width: 31vw;
     padding: 2% 0%;
     flex: 2;
+    cursor: pointer;
 }
 
 .grid-space {
@@ -78,4 +79,14 @@ h3, h4{
     justify-content: center;
     font-size: 2em;
     margin: -5px;
+    animation: fadeIn .5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
