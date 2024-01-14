@@ -7,10 +7,10 @@ var playerSections = {
 var dataSelector = document.querySelectorAll('[data-value]');
 
 window.addEventListener('load', function() {
-    createPlayer('playerOne', '&#x2658;', 'Player One');
-    createPlayer('playerTwo', '&#x265E;', 'Player Two');
+    createPlayer('playerOne', '&#x2658;', window.prompt('Enter First Name:', 'Player One'));
+    createPlayer('playerTwo', '&#x265E;', window.prompt('Enter First Name:', 'Player Two'));
     updatePlayerDetails(players, playerSections);
-    firstTurn();
+    firstTurn(players);
 });
 
 boardSection.addEventListener('click', function(event){
@@ -25,6 +25,7 @@ var playedPositions = {
     playerTwo: []
 };
 var winningPositions = ['012', '345', '678', '036', '147', '258', '048', '246'];
+var newGame;
 
 function createPlayer(id, token, playerName){
     var newPlayer = {
@@ -51,9 +52,13 @@ function updatePlayerDetails(allPlayers, section) {
     }
 };
 
-function firstTurn() {
+function firstTurn(allPlayers) {
+    var playerOne = allPlayers[0];
+    var playerTwo = allPlayers[1];
+    newGame = (newGame === playerOne) ? playerTwo : playerOne;
+
     whosTurnSection.innerHTML = `
-    <h1 id="${players[0].id}">It's <span>${players[0].token}</span>'s turn!</h1>`
+    <h1 id="${newGame.id}">It's <span>${newGame.token}</span>'s turn!</h1>`
 };
 
 function playSpace(event, allPlayers) {
@@ -93,7 +98,6 @@ function checkIfWin(playerSpots, winning, winner) {
 function checkIfDraw(board) {
     for(var i = 0; i < board.children.length; i++) {
         if(!board.children[i].hasChildNodes()) {
-            console.log('once')
             return updateTurn(players);
         }
     }
@@ -110,14 +114,12 @@ function updateTurn(allPlayers) {
 };
 
 function showWinner(winner) {
-    var whosTurn = whosTurnSection.children[0].id;
-
     whosTurnSection.innerHTML = `
     <h3>Congratulations ${winner.name}, you WON!!</h3>`
 
     increaseWins(winner);
     setTimeout(function() {
-        changeTurnAfterGame(whosTurn, players);
+        firstTurn(players);
         clearBoard(playedPositions);
     }, 3500);
 };
@@ -128,25 +130,13 @@ function increaseWins(winner) {
 }
 
 function showDraw() {
-    var whosTurn = whosTurnSection.children[0].id;
-
     whosTurnSection.innerHTML = `
     <h3>It's a DRAW! Get Ready For The Next Game!</h3>`
 
     setTimeout(function() {
-        changeTurnAfterGame(whosTurn, players);
+        firstTurn(players);
         clearBoard(playedPositions);
     }, 3500);
-};
-
-function changeTurnAfterGame(turn, allPlayers) {
-        if(turn === 'playerOne') {
-            return whosTurnSection.innerHTML = `
-            <h1 id="${allPlayers[1].id}">It's <span>${allPlayers[1].token}</span>'s turn!</h1>`
-        } else {
-            whosTurnSection.innerHTML = `
-            <h1 id="${allPlayers[0].id}">It's <span>${allPlayers[0].token}</span>'s turn!</h1>`
-        }
 };
 
 function clearBoard(positions) {
@@ -156,5 +146,3 @@ function clearBoard(positions) {
     positions.playerOne = [];
     positions.playerTwo = [];
 };
-
-//window.prompt('Enter First Name:', 'Player One'), this goes where the line 10 col 43

@@ -37,12 +37,15 @@ main {
 }
 
 .grid-space {
-    border: 5px solid #000080;
     margin: -5px;
+    border-width: 5px;
+    border-style: solid;
 }
 
 .grid-space:nth-child(-n+3) {
     border-top: none;
+    border-image: linear-gradient(to bottom, #fff, #000080);
+    border-image-slice: 1;
 }
 
 .grid-space:nth-child(3n) {
@@ -51,10 +54,16 @@ main {
 
 .grid-space:nth-child(n+7) {
     border-bottom: none;
+    border-image: linear-gradient(to bottom, #000080, #000);
+    border-image-slice: 1;
 }
 
 .grid-space:nth-child(3n-2) {
     border-left: none;
+}
+
+.grid-space:nth-child(n+3):nth-child(-n+6) {
+    border-color: #000080;
 }
 
 h2 {
