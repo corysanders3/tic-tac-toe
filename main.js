@@ -127,7 +127,7 @@ function showWinner(winner) {
 function increaseWins(winner) {
     winner.wins ++;
     updatePlayerDetails(players, playerSections);
-}
+};
 
 function showDraw() {
     whosTurnSection.innerHTML = `
