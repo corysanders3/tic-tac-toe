@@ -114,6 +114,7 @@ function updateTurn(allPlayers) {
 };
 
 function showWinner(winner) {
+    boardSection.classList.add('pointer');
     whosTurnSection.innerHTML = `
     <h3>Congratulations ${winner.name}, you WON!!</h3>`
 
@@ -121,6 +122,7 @@ function showWinner(winner) {
     setTimeout(function() {
         firstTurn(players);
         clearBoard(playedPositions);
+        boardSection.classList.remove('pointer');
     }, 3500);
 };
 
@@ -130,12 +132,14 @@ function increaseWins(winner) {
 };
 
 function showDraw() {
+    boardSection.classList.add('pointer');
     whosTurnSection.innerHTML = `
     <h3>It's a DRAW! Get Ready For The Next Game!</h3>`
 
     setTimeout(function() {
         firstTurn(players);
         clearBoard(playedPositions);
+        boardSection.classList.remove('pointer');
     }, 3500);
 };
 

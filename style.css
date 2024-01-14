@@ -99,3 +99,7 @@ h3, h4{
         opacity: 1;
     }
 }
+
+.pointer {
+    pointer-events: none;
+}
