@@ -46,5 +46,5 @@ Challenges:
 1. Again, the logic to find a winner was tough. I really only thought of using index positions of winning conditions and comparing that with where each player had played on the board. The idea was quick to come to, but the comparison took me some time to figure out.
 2. Switching player after each turn was easy at first, until I realized the switch would happen if I clicked on a poisiton already played, or on the border of the board. That took me some time to correct, but I ended up with a solution I was happy with.
 
-### Deployed Pages
+### Deployed Page
 [Tic-Tac-Toe](https://corysanders3.github.io/tic-tac-toe/)
