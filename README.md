@@ -1,3 +1,5 @@
+# Tic-Tac-Toe
+
 ### Abstract:
 For this project, I built a fully functioning tic tac toe game. It will detect a winner, or a draw if the game ends without a winner. The game will automatically restart after 3.5 seconds, so you can play another game. The app solves the problem of who is the master tic tac toe player, you or your adversaries. Play using the same computer and mouse and take turns selecting your position to prove who is the better player.
 
@@ -35,7 +37,6 @@ The Learning Goals for this project were the following:
 I worked with html, css, and javascript.
 
 ### Wins + Challenges:
-[//]: <> (What are 2-3 wins you have from this project? What were some challenges you faced - and how did you get over them?)
 Wins:
 1. Being able to figure out the logic to have the game see if there was a winning condition. This was the toughest part, and took me about a half day to fully figure out a solution.
 2. When I saw bugs, I was able to rectify the issues fairly quickly ex: disabling clicks when there was a winner (during that 3.5 second timeout).
@@ -44,3 +45,6 @@ Wins:
 Challenges:
 1. Again, the logic to find a winner was tough. I really only thought of using index positions of winning conditions and comparing that with where each player had played on the board. The idea was quick to come to, but the comparison took me some time to figure out.
 2. Switching player after each turn was easy at first, until I realized the switch would happen if I clicked on a poisiton already played, or on the border of the board. That took me some time to correct, but I ended up with a solution I was happy with.
+
+### Deployed Pages
+[Tic-Tac-Toe](https://corysanders3.github.io/tic-tac-toe/)
