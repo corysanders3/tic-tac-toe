@@ -20,7 +20,7 @@ Here are the steps to clone the game and play on your own computer:
 ![GIF of Game](https://github.com/corysanders3/tic-tac-toe/assets/41808895/f6c04ebe-47b8-41bd-a234-6fe9e0def0ed)
 
 ### Context:
-This was a solo project and was actually very enjoyable. I probably spent around 20 hours total on it, with 15 hours being the bulk of the setup and functions, and 5 hours of clean up and refactoring. I am 6 weeks into the Turing program. 
+This was a solo project and was actually very enjoyable. I probably spent around 20 hours total on it, with 15 hours being the bulk of the setup and functions, and 5 hours of clean up and refactoring. I am 6 weeks into the Turing School of Software & Design. 
 
 ### Contributors:
 I worked on this project alone, as it was a solo project. [Here is a link to my GitHub page](https://github.com/corysanders3).
