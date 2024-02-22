@@ -7,8 +7,8 @@ var playerSections = {
 var dataSelector = document.querySelectorAll('[data-value]');
 
 window.addEventListener('load', function() {
-    createPlayer('playerOne', '&#x2658;', window.prompt('Enter First Name:', 'Player One'));
-    createPlayer('playerTwo', '&#x265E;', window.prompt('Enter First Name:', 'Player Two'));
+    createPlayer('playerOne', '&#x2658;', 'Player One');
+    createPlayer('playerTwo', '&#x265E;', 'Player Two');
     updatePlayerDetails(players, playerSections);
     firstTurn(players);
 });
@@ -27,12 +27,12 @@ var playedPositions = {
 var winningPositions = ['012', '345', '678', '036', '147', '258', '048', '246'];
 var newGame;
 
-function createPlayer(id, token, playerName){
+function createPlayer(id, token, name){
     var newPlayer = {
     id,
     token,
     wins: 0,
-    name: playerName
+    name
     };
     players.push(newPlayer)
 };
