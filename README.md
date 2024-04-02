@@ -13,6 +13,14 @@ Here are the steps to clone the game and play on your own computer:
 6. Run open index.html.
 7. Enjoy the game.
 
+## Primary Technologies Used
+
+<div align="center">
+    <img src="https://img.shields.io/badge/JavaScript-E8D44D?style=for-the-badge&logo=javascript&logoColor=fff" alt="javascript badge">
+    <img src="https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=fff&style=for-the-badge" alt="html badge">
+    <img src="https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=fff&style=for-the-badge" alt="css badge">
+</div>
+
 ## Preview of App
 
 ![GIF of Game](https://github.com/corysanders3/tic-tac-toe/assets/41808895/f6c04ebe-47b8-41bd-a234-6fe9e0def0ed)
