@@ -58,4 +58,4 @@ Challenges:
 
 ### Deployed Page
 
-[Tic-Tac-Toe](https://corysanders3.github.io/tic-tac-toe/)
+[Tic-Tac-Toe](https://tic-tac-toe-tau-brown.vercel.app/)
